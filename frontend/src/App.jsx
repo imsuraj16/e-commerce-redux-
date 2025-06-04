@@ -1,19 +1,16 @@
 import React, { useEffect } from "react";
 import axios from "./api/Apiconfig";
+import { asyncGetUsers } from "./store/userActions";
+import { useDispatch } from "react-redux";
 
 const App = () => {
-  const product = async () => {
-    try {
-      let res = await axios.get("/products");
-      console.log(res);
-      
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  const dispatch = useDispatch()
+  
+
 
   useEffect(() => {
-    product();
+    dispatch(asyncGetUsers());
   }, []);
 
   return <div className="bg-amber-600 w-full min-h-screen"></div>;
