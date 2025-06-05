@@ -1,19 +1,22 @@
 import React, { useEffect } from "react";
-import axios from "./api/Apiconfig";
-import { asyncGetUsers } from "./store/userActions";
+import Mainroutes from "./routes/Mainroutes";
+import Navbar from "./components/Navbar";
+import { currentUser } from "./store/actions/userActions";
 import { useDispatch } from "react-redux";
 
 const App = () => {
-
-  const dispatch = useDispatch()
-  
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(asyncGetUsers());
+    dispatch(currentUser());
   }, []);
 
-  return <div className="bg-amber-600 w-full min-h-screen"></div>;
+  return (
+    <div className="w-full min-h-screen bg-blue-300 flex flex-col gap-[3rem]">
+      <Navbar />
+      <Mainroutes />
+    </div>
+  );
 };
 
 export default App;
