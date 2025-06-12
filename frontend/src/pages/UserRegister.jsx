@@ -1,11 +1,11 @@
 import React from 'react'
 
-const App = () => {
+const UserRegister = () => {
   return (
     <div>
-      hii
+      
     </div>
   )
 }
 
-export default App
+export default UserRegister
