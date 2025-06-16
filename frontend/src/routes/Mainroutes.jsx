@@ -10,7 +10,6 @@ const Mainroutes = () => {
   return (
     <Routes>
       <Route path='/' element = {<Home/>} />
-      <Route path='/profile' element = {<Profile/>} />
       <Route path='/login' element = {<Login/>} />
       <Route path='/cart' element = {<Cart/>} />
       <Route path='/user-register' element = {<UserRegister/>} />
