@@ -6,6 +6,8 @@ import { logoutUser } from "../store/actions/userActions";
 const Nav = () => {
   const [loginDropDown, setLoginDropDown] = useState(false);
   const user = useSelector((state) => state.user.user);
+
+
   const dispatch = useDispatch();
 
   return (
@@ -22,8 +24,8 @@ const Nav = () => {
       <div className="flex  gap-[3rem] items-center justify-between">
         {user && user?.isAdmin && (
           <>
-            <NavLink>Your listings</NavLink>
-            <NavLink to='/admin/add-product'>Add Product</NavLink>
+            <NavLink to={`/admin/${user.id}/listings`}>Your listings</NavLink>
+            <NavLink to="/admin/add-product">Add Product</NavLink>
           </>
         )}
 
@@ -42,7 +44,9 @@ const Nav = () => {
               >
                 Become a Admin
               </NavLink>
-              <button onClick={() => dispatch(logoutUser())}>Logout</button>
+              {user && (
+                <button onClick={() => dispatch(logoutUser())}>Logout</button>
+              )}
             </div>
           )}
         </div>

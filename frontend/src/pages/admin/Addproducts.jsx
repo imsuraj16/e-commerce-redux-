@@ -1,15 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../store/actions/productActions";
+import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
-
 
 const Addproducts = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state=>state.user.user);
-  
-  
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
 
   const {
     register,
@@ -19,9 +18,10 @@ const Addproducts = () => {
   } = useForm();
 
   const addProductHandler = (productData) => {
-    productData.ownwerId = user.id
-    productData.id = nanoid()
+    productData.ownerId = user.id;
+    productData.id = nanoid();
     dispatch(addProduct(productData));
+    navigate('/');
   };
 
   return (
