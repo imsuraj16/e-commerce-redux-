@@ -19,6 +19,7 @@ const Login = () => {
     // console.log(loginuserdata);
 
     dispatch(loginCurrentUser(loginuserdata));
+    navigate('/')
   };
 
   return (

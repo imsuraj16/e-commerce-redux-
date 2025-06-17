@@ -6,20 +6,22 @@ import { addUser } from "../store/actions/userActions";
 import { nanoid } from "nanoid";
 
 const UserRegister = () => {
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+  
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const registerUserHandler = (userData) => {
-    console.log(userData);
     userData.id = nanoid();
+    userData.isAdmin = false
     dispatch(addUser(userData));
     navigate("/login");
   };

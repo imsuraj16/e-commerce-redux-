@@ -1,14 +1,24 @@
-import React from 'react'
-import Nav from './components/Nav'
-import Mainroutes from './routes/Mainroutes'
+import React, { useEffect } from "react";
+import Nav from "./components/Nav";
+import Mainroutes from "./routes/Mainroutes";
+import { currentUser } from "./store/actions/userActions";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "./store/actions/productActions";
 
 const App = () => {
-  return (
-    <div className='w-full min-h-screen bg-gray-300 flex flex-col gap-[2rem]'>
-      <Nav/>
-      <Mainroutes/>
-    </div>
-  )
-}
+  const dispatch = useDispatch();
 
-export default App
+  useEffect(() => {
+    dispatch(currentUser());
+    dispatch(fetchProducts())
+  }, []);
+
+  return (
+    <div className="w-full min-h-screen bg-gray-300 flex flex-col gap-[2rem]">
+      <Nav />
+      <Mainroutes />
+    </div>
+  );
+};
+
+export default App;
