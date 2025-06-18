@@ -21,6 +21,11 @@ const AdminListings = () => {
     fetchProducta();
   }, []);
 
+
+  if(adminProducts.length===0) return <div className="text-[10rem]">no Listings</div>
+
+  if (!adminProducts) return <div className="text-[10rem]">loading...</div>;
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
       {adminProducts.map((p) => (

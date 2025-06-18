@@ -9,6 +9,7 @@ import Addproducts from '../pages/admin/Addproducts'
 import AdminListings from '../pages/admin/AdminListings'
 import ProductDetails from '../pages/ProductDetails'
 import AdminProductDetails from '../pages/admin/AdminProductDetails'
+import UserProfile from '../pages/UserProfile'
 
 const Mainroutes = () => {
   return (
@@ -19,6 +20,7 @@ const Mainroutes = () => {
       <Route path='/products/:id' element = {<ProductDetails/>} />
       <Route path='/user-register' element = {<UserRegister/>} />
       <Route path='/admin-register' element = {<Adminregister/>}/>
+      <Route path='/Profile' element = {<UserProfile/>}/>
 
 
   <Route path='/admin/add-product' element = {<Addproducts/>}/>
