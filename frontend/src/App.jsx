@@ -5,6 +5,7 @@ import { currentUser } from "./store/actions/userActions";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./store/actions/productActions";
 
+
 const App = () => {
   const dispatch = useDispatch();
 

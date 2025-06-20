@@ -23,9 +23,6 @@ const Home = () => {
           </p>
           <div className="flex justify-between items-center mt-4">
             <span className="font-bold text-blue-600">${p.price}</span>
-            <button className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">
-              Add to Cart
-            </button>
           </div>
         </Link>
       ))}

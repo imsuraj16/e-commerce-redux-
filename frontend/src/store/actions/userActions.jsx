@@ -6,7 +6,7 @@ export const currentUser = () => async (dispatch) => {
 
   if (user) {
     dispatch(loadUser(user));
-  }
+  } 
 };
 
 export const logoutUser = () => async (dispatch) => {
@@ -38,7 +38,6 @@ export const registerUserAsAdmin = (admindata) => async (dispatch) => {
 
     const regUser = await axios.patch(`/users/${user.id}`, { isAdmin: true });
 
-    console.log(regUser.data);
     localStorage.setItem("user", JSON.stringify(regUser.data));
     dispatch(currentUser());
   } catch (error) {
