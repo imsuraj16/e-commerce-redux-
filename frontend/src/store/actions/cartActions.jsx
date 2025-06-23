@@ -1,31 +1,57 @@
 import axios from "../../api/apiconfig";
-import { loadCart } from "../reducers/cartReducer";
+import { currentUser } from "./userActions";
 
-
-export const cart = (userId, productId) => async (dispatch) => {
+export const addToCart = (user, product) => async (dispatch) => {
   try {
-    const { data } = await axios.get(`/cart?userId=${userId}&productId=${productId}`);
-    
-    if (data.length > 0) {
-      const existingItem = data[0];
-      await axios.patch(`/cart/${existingItem.id}`, {
-        quantity: existingItem.quantity + 1,
-      });
-    } else {
-      await axios.post(`/cart`, { userId, productId, quantity: 1 });
+    const existing = user.cart.find((item) => item.productid === product.id);
+
+    let updateCart;
+
+    if (existing)
+      updateCart = user.cart.map((item) =>
+        item.productid === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+    else {
+      updateCart = [
+        ...user.cart,
+        { productid: product.id, producturl: product.url, quantity: 1 },
+      ];
     }
 
-    dispatch(fetchCart()); // ✅ Pass userId for proper fetch
-  } catch (err) {
-    console.log("Cart API error:", err);
-  }
-};
+    let {data} = await axios.patch(`/users/${user.id}`, { cart: updateCart });
+    
+    
+    
+    localStorage.setItem('user',JSON.stringify(data))
+    dispatch(currentUser())
 
-export const fetchCart = (userId) => async (dispatch) => {
-  try {
-    const { data } = await axios.get(`/cart?userId=${userId}`);
-    dispatch(loadCart(data));
-  } catch (err) {
-    console.log("Fetch cart error:", err);
+  } catch (error) {
+    console.log(error);
   }
-};
+};  
+
+
+
+
+export const incrementCart = (user,productid)=> async(dispatch)=>{
+
+  let updateCart = user.cart.map((item)=>item.productid===productid ? {...item,quantity : item.quantity + 1} : item)
+
+  let {data} = await axios.patch(`/users/${user.id}`,{cart : updateCart})
+  localStorage.setItem("user",JSON.stringify(data))
+  
+dispatch(currentUser())
+
+}
+export const decrementCart = (user,productid)=> async(dispatch)=>{
+
+  let updateCart = user.cart.map((item)=>item.productid===productid ? {...item,quantity : item.quantity - 1} : item).filter(item=>item.quantity>0)
+
+  let {data} = await axios.patch(`/users/${user.id}`,{cart : updateCart})
+  localStorage.setItem("user",JSON.stringify(data))
+  
+dispatch(currentUser())
+
+}
